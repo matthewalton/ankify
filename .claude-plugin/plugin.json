@@ -1,0 +1,19 @@
+{
+  "name": "ankify",
+  "description": "Turn material (PDF/image/text) or chat into reviewed Anki cards via AnkiConnect.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Matt Alton",
+    "email": "mattalton97@gmail.com"
+  },
+  "homepage": "https://github.com/matthewalton/ankify",
+  "repository": "https://github.com/matthewalton/ankify",
+  "license": "MIT",
+  "keywords": [
+    "anki",
+    "flashcards",
+    "spaced-repetition",
+    "ankiconnect",
+    "study"
+  ]
+}

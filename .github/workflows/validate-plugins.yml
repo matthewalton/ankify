@@ -1,0 +1,27 @@
+name: validate-plugins
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON parses
+        run: |
+          jq empty .claude-plugin/marketplace.json
+          jq empty .claude-plugin/plugin.json
+          jq empty .mcp.json
+
+      - name: Validate marketplace.json required fields
+        run: |
+          jq -e '.name and .owner and .owner.name and (.plugins | type == "array")' \
+            .claude-plugin/marketplace.json > /dev/null
+
+      - name: Validate plugin.json required fields
+        run: |
+          jq -e '.name and .version' .claude-plugin/plugin.json > /dev/null
