@@ -73,6 +73,9 @@ Issues and PRs welcome. Keep the plugin's value in the card-authoring methodolog
 (`skills/anki-cards/SKILL.md`); the MCP server is an external dependency (see
 [`docs/adr/0001`](docs/adr/0001-depend-on-ankimcp-server.md)).
 
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/) — see
+[CONTRIBUTING.md](CONTRIBUTING.md) for the format and types.
+
 ## License
 
 [MIT](LICENSE) © Matt Alton.
