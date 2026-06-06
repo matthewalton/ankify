@@ -100,19 +100,33 @@ the gate and commit directly. Honor that for the current batch only.
   appropriate add/remove tag tools). **Caveat:** the update silently fails if that note is currently
   open in Anki's Browser window — warn the user to close it if an edit doesn't take.
 
+## Sync
+
+After a successful commit or edit, push the change to AnkiWeb so it reaches the user's other devices.
+Call the server's **`sync`** tool, then add a brief line to your report: `Synced to AnkiWeb.`
+
+- **Only sync when something actually changed.** Skip the sync if nothing landed — `addNotes`
+  returned all `null` (every slot a duplicate), the user culled everything, or an edit didn't take.
+  Don't show the sync line in that case.
+- **Fail gracefully.** `sync` uses the AnkiWeb credentials saved in Anki's preferences. If it errors
+  — commonly the account isn't logged in, or there's a conflict needing a one-off manual full sync —
+  **do not present the card add/edit as failed.** The notes are already in the local collection.
+  Report that they landed, then add a calm one-liner that the AnkiWeb sync didn't go through (with the
+  reason) and suggest syncing manually in the Anki app.
+
 ## Cards from material — flow
 
 1. Preflight.
 2. Read the material; extract the test-worthy facts.
 3. Draft atomic cards, choosing note type per item; resolve fields, deck, tags; check duplicates.
-4. Review gate → commit `addNotes` → report.
+4. Review gate → commit `addNotes` → sync → report.
 
 ## Cards from chat — flow
 
 1. Preflight.
 2. Identify the fact(s) the user wants carded from the conversation.
 3. Draft (usually 1–few cards); resolve note type/fields/deck/tags.
-4. Review gate → commit → report.
+4. Review gate → commit → sync → report.
 
 ## Edit existing — flow
 
@@ -120,4 +134,4 @@ the gate and commit directly. Honor that for the current batch only.
 2. Find the target note: `findNotes` with an Anki search query built from the user's description;
    if multiple match, show candidates (`notesInfo`) and confirm which one.
 3. Show current field values, propose the change, confirm.
-4. `updateNoteFields` (warn re: open Browser) → confirm the change landed.
+4. `updateNoteFields` (warn re: open Browser) → confirm the change landed → sync.

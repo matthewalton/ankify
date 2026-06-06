@@ -13,6 +13,8 @@ no decisions (those live in `docs/adr/`), no roadmap.
   any note is created or updated in Anki.
 - **Commit** — the act of pushing approved drafts into Anki (via `addNotes`) or applying an approved
   change (via `updateNoteFields`).
+- **Sync** — pushing the local collection to AnkiWeb after a commit so the change reaches the user's
+  other devices, via AnkiConnect's `sync` action.
 - **Note** — the editable record in Anki: a set of fields plus a note type. ankify creates and edits
   Notes.
 - **Card** — what Anki schedules and shows during review, generated from a Note. User-facing copy

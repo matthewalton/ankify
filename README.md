@@ -15,6 +15,9 @@ the AnkiConnect MCP server only stores media and creates/updates notes.
 - **Edit existing cards** — find a note and update its fields or tags.
 - Picks **Basic vs Cloze** per card, suggests a **target deck**, tags for findability, and skips
   duplicates — all shown in a **review step** before anything is written to Anki.
+- **Auto-syncs to AnkiWeb** after adding or editing cards, so changes reach your phone and other
+  devices without a manual sync. Needs AnkiWeb set up in the Anki desktop app; if a sync can't go
+  through it's reported but never blocks the card from being saved locally.
 
 ## Prerequisites
 
@@ -64,8 +67,8 @@ review for a batch you trust.
 
 ## Roadmap
 
-Not in v1, but candidates for later: study/review automation, collection stats, AnkiWeb sync
-management, custom note-type creation, and bulk reorganization.
+Not in v1, but candidates for later: study/review automation, collection stats, custom note-type
+creation, and bulk reorganization.
 
 ## Contributing
 
