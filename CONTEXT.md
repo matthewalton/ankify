@@ -25,3 +25,19 @@ no decisions (those live in `docs/adr/`), no roadmap.
   (e.g. `Spanish::Verbs`).
 - **Fast path** — committing drafts without the review gate, when the user explicitly opts out of
   review for a batch.
+- **Steward / curation** — ankify acting on the cards already in the collection to improve them
+  (audit and fix), as opposed to authoring new cards from material or chat.
+- **Audit** — a read-only pass in which ankify reads the cards in a chosen scope and judges their
+  quality against the card-quality rubric. An audit produces a triage; it changes nothing.
+- **Scope** — the bounded set an audit runs over: a deck, a tag, or the user's leeches.
+- **Triage** — the ranked, read-only summary an audit produces: flagged cards grouped by problem,
+  worst-first, shown before any fix is proposed.
+- **Leech** — a card Anki has flagged (the `leech` tag) as repeatedly failed. ankify reads it as a
+  performance signal pointing at cards worth auditing — not as proof the card is badly written.
+- **Fix** — a change an audit proposes for a flagged card: rewrite in place, split (one card into
+  several), retag, move deck, or (only on explicit confirmation) delete.
+- **Disposal** — taking an unsalvageable card out of rotation. ankify does this by tagging the card
+  for the user's attention in Anki, not by deleting or suspending it directly.
+- **`steward::` tags** — ankify's bookkeeping tags on audited cards: `steward::audited` (handled —
+  skip on future passes), `steward::keep` (judged hard-but-well-made — excluded permanently), and
+  `steward::flagged` (marked for the user's disposal in Anki).
