@@ -8,11 +8,15 @@ edits existing notes. It drafts cards, shows them to you for review, then adds t
 Claude reads the material and writes the card content (including Cloze deletions). The AnkiConnect
 MCP server only stores media and creates or updates notes.
 
-## What it can do (v1)
+## What it can do
 
 - **Cards from material.** Give it a PDF, image, or text and it drafts cards.
 - **Cards from chat.** "Make a card out of what we just discussed."
 - **Edit existing cards.** Find a note and update its fields or tags.
+- **Curate existing cards.** Audit a deck, a tag, or your leeches against the same quality rubric it
+  writes by. It shows a read-only triage (worst-first), then fixes on your approval — rewriting,
+  splitting, retagging, or moving cards while preserving their scheduling history. Cards it can't
+  salvage are tagged for your attention rather than deleted (deletes need your explicit per-card OK).
 - It picks Basic or Cloze per card, suggests a target deck, adds tags for findability, and skips
   duplicates. All of this shows up in a review step before anything is written to Anki.
 - It auto-syncs to AnkiWeb after adding or editing cards, so changes reach your phone and other
@@ -55,6 +59,8 @@ Or use the explicit commands:
 
 - `/ankify:add [file or description]` creates cards from material or chat.
 - `/ankify:edit [which note and what to change]` updates an existing note.
+- `/ankify:curate [deck, tag, or leeches]` audits existing cards and fixes the bad ones (defaults to
+  your leeches).
 
 By default ankify shows drafts for review before writing to Anki. Say **"just add them"** to skip the
 review for a batch you trust.
@@ -67,8 +73,9 @@ review for a batch you trust.
 
 ## Roadmap
 
-Not in v1, but candidates for later: study and review automation, collection stats, custom note-type
-creation, and bulk reorganization.
+Candidates for later: study and review automation, collection stats, custom note-type creation (with
+bespoke CSS), Image Occlusion, and full-collection discovery sweeps (curation today is scoped to a
+deck, a tag, or your leeches).
 
 ## Contributing
 

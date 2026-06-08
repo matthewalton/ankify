@@ -30,18 +30,13 @@ Do not attempt to create or edit cards until it responds.
 
 When ambiguous, ask one short clarifying question rather than guessing.
 
-## Card-authoring rules (apply to all creation flows)
+## Card quality (shared rubric)
 
-Cards are reviewed hundreds of times — a bad card is worse than no card. Follow these:
-
-- **Atomic / minimum information.** One fact per card. Split compound facts into separate cards.
-- **Pick the note type per item** (and state which you chose in the review):
-  - **Basic** (Front/Back) for discrete Q&A facts you want to recall cold.
-  - **Cloze** for facts embedded in context, definitions, and lists. Use `{{c1::hidden}}` markup;
-    number deletions (`{{c1::…}}`, `{{c2::…}}`) when more than one piece should be tested separately.
-- **No yes/no or trivially-guessable cards.** Prompts must be specific and unambiguous.
-- **Keep the front short and the answer precise.** Front-load the cue.
-- **Preserve the user's wording/terminology** from the source where it matters for recall.
+Card creation and curation judge cards against the same rubric. **Read it before drafting:**
+`${CLAUDE_PLUGIN_ROOT}/references/card-quality-rubric.md`. It is the single source of truth for card
+quality (atomic, right note type, no yes/no, front-loaded, preserves the user's wording) — do not
+restate or paraphrase its rules here. State the note type you chose for each card in the review so
+the user can override.
 
 ### Resolve the note type's fields before drafting
 
