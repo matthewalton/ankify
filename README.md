@@ -17,8 +17,14 @@ MCP server only stores media and creates or updates notes.
   writes by. It shows a read-only triage (worst-first), then fixes on your approval — rewriting,
   splitting, retagging, or moving cards while preserving their scheduling history. Cards it can't
   salvage are tagged for your attention rather than deleted (deletes need your explicit per-card OK).
-- It picks Basic or Cloze per card, suggests a target deck, adds tags for findability, and skips
-  duplicates. All of this shows up in a review step before anything is written to Anki.
+- It picks the right note type per card — Basic, Basic (and reversed), type-in-the-answer, Cloze, or
+  Image Occlusion — places cloze blanks on the part you're actually studying, suggests a target deck,
+  adds tags, and skips duplicates. The review step shows each card **the way Anki will test it**, with
+  a one-line note on what it tests, before anything is written.
+- **Optional personal profile.** Drop a `~/.ankify/profile.md` (ankify offers to create one on first
+  run) to tell it your subjects/languages, which scripts you can type, and how plain or styled you
+  like your cards. It's machine-local and never leaves your computer; without it, ankify behaves
+  generically.
 - It auto-syncs to AnkiWeb after adding or editing cards, so changes reach your phone and other
   devices without a manual sync. This needs AnkiWeb set up in the Anki desktop app. If a sync can't
   go through, ankify reports it, but the card still saves locally.
@@ -74,8 +80,8 @@ review for a batch you trust.
 ## Roadmap
 
 Candidates for later: study and review automation, collection stats, custom note-type creation (with
-bespoke CSS), Image Occlusion, and full-collection discovery sweeps (curation today is scoped to a
-deck, a tag, or your leeches).
+bespoke CSS), and full-collection discovery sweeps (curation today is scoped to a deck, a tag, or your
+leeches).
 
 ## Contributing
 

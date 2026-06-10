@@ -19,12 +19,18 @@ no decisions (those live in `docs/adr/`), no roadmap.
   Notes.
 - **Card** — what Anki schedules and shows during review, generated from a Note. User-facing copy
   says "cards"; the thing we create/edit is technically a Note.
-- **Note type / model** — the template a Note follows. **Basic** (fields `Front`/`Back`) or **Cloze**
-  (field `Text` with `{{c1::…}}` markup), plus any custom types in the user's collection.
+- **Note type / model** — the template a Note follows, defining its fields and how cards are
+  generated from them. Anki's built-ins include **Basic** (`Front`/`Back`), **Cloze** (`Text` with
+  `{{c1::…}}` markup), the reversed and type-in-the-answer Basic variants, and **Image Occlusion**,
+  plus any custom types in the user's collection.
 - **Deck** — Anki's organizational container for cards. Nesting is expressed with `::`
   (e.g. `Spanish::Verbs`).
 - **Fast path** — committing drafts without the review gate, when the user explicitly opts out of
   review for a batch.
+- **Profile** — the user's personal, machine-local settings that specialize the generic
+  card-quality rubric to them (their subjects and languages, which scripts they can type, styling and
+  deck preferences). It is never shipped with the plugin and never committed; with no profile present,
+  ankify behaves generically.
 - **Steward / curation** — ankify acting on the cards already in the collection to improve them
   (audit and fix), as opposed to authoring new cards from material or chat.
 - **Audit** — a read-only pass in which ankify reads the cards in a chosen scope and judges their
