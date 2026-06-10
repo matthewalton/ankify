@@ -29,17 +29,24 @@ Before reading or changing anything, confirm AnkiConnect is up by listing decks 
 
 Do not attempt to read or curate cards until it responds.
 
-## Select & read (scope the audit)
+## Preflight: load the user's profile
 
-An audit runs over exactly **one scope**. Resolve it from what the user asked:
+After confirming Anki is reachable, read `~/.ankify/profile.md` if it exists, and pass it to the
+Auditor (below) so it judges by the user's preferences (e.g. their styling palette, or that a
+hard-but-well-made card in their subject should be kept). With no profile, the audit runs generically.
 
-- **Deck** — `findNotes` with `deck:"<Deck::Sub>"`. If the user named a deck loosely, list decks
-  first (`listDecks`) and confirm which one.
-- **Tag** — `findNotes` with `tag:<tag>`. Use `getTags` to disambiguate if the tag is unclear.
-- **Leeches** (the **default** when the user gives no scope) — `findNotes` with `tag:leech`.
+## Resolve the scope (one scope per audit)
 
-**Always exclude already-handled cards.** Append the steward exclusion set to every scope query so
-past passes aren't re-triaged:
+An audit runs over exactly **one scope**. Resolve it interactively from what the user asked — this
+stays in the main thread because it may need a clarifying question:
+
+- **Deck** — `deck:"<Deck::Sub>"`. If the user named a deck loosely, list decks first (`listDecks`)
+  and confirm which one.
+- **Tag** — `tag:<tag>`. Use `getTags` to disambiguate if the tag is unclear.
+- **Leeches** (the **default** when the user gives no scope) — `tag:leech`.
+
+**Always exclude already-handled cards.** Append the steward exclusion set to the scope query so past
+passes aren't re-triaged:
 
 ```
 -tag:steward::audited -tag:steward::keep -tag:steward::flagged
@@ -47,45 +54,30 @@ past passes aren't re-triaged:
 
 e.g. `deck:"Spanish::Verbs" -tag:steward::audited -tag:steward::keep -tag:steward::flagged`.
 
-Then gather what you need to judge:
+## Delegate the audit to the Auditor subagent
 
-- **Performance context (for prioritization):** `deckStats` and/or `review_stats` for the deck(s) in
-  scope; treat `tag:leech` membership as the per-card performance flag.
-- **Card content:** read the notes with `notesInfo` (and `get_cards` where card-level data helps).
-- **Cap: read up to ~50 cards in scope for a triage.** If the scope is larger, say so and take the
-  highest-priority ~50 first (leeches and low-retention decks first); offer to continue in a later
-  pass.
+Hand the **reading and diagnosis** to the read-only **`anki-auditor`** subagent (via the Agent tool).
+The audit is token-heavy (up to ~50 cards' fields and stats) and must never mutate the collection —
+the Auditor has **read-only Anki tools only**, so isolating it there keeps your main thread clean and
+makes "the audit cannot change anything" a property of the tooling, not a rule to remember.
 
-## Diagnose (two-signal, content-adjudicated)
-
-Diagnosis uses two signals, and they do different jobs:
-
-- **Performance prioritizes.** A leech tag, or a card in a low-retention deck (per the aggregates),
-  means "look here first." **A leech is a *pointer*, not proof the card is badly written.**
-- **Content decides.** The verdict comes from judging the card against the rubric — never from the
-  performance signal alone.
-
-Assign each card a verdict:
-
-- **`well-made`** — meets the rubric. Skip (no change); mark `steward::audited`.
-- **`hard-but-well-made`** — genuinely difficult but correctly built. A **first-class outcome**, not
-  an edge case. Leave the content alone; mark `steward::keep` so it's excluded permanently.
-- **`not-atomic`** — tests several facts at once → **split**.
-- **`ambiguous` / `yes-no` / `not front-loaded`** → **rewrite in place**.
-- **`misfiled`** — wrong deck or missing/wrong tags → **move deck / retag**.
-- **`unsalvageable`** — can't be fixed into a good card → **disposal** (flag for the user; see Commit).
+Pass it: the resolved scope query, the path to the card-quality rubric
+(`${CLAUDE_PLUGIN_ROOT}/references/card-quality-rubric.md`), and the profile path
+(`~/.ankify/profile.md`) if present. It reads the scope, applies the two-signal diagnosis, and
+**returns the structured triage** — flagged cards grouped by problem, worst-first, each with its
+rendered content, verdict, and proposed fix. It changes nothing.
 
 ## Triage (read-only)
 
-**Before proposing any change, show a read-only triage.** This step changes nothing in Anki.
+Present the triage the Auditor returned — this step changes nothing in Anki.
 
-- Group flagged cards by problem, **worst-first**.
-- For each card show: the field content (Front/Back or Cloze `Text`), the verdict, and the proposed
-  fix.
+- Groups of flagged cards by problem, **worst-first**.
+- For each card: the rendered content (how it's tested), the verdict, and the proposed fix.
 - A compact table or grouped numbered list is ideal.
 
 Then ask the user which group(s) or individual cards to act on. Only the selected subset goes through
-the review gate.
+the review gate. (Verdicts and the fix each maps to are defined in the Auditor; the fixes you apply
+below are: rewrite-in-place, split, retag, move-deck, and — only on explicit confirmation — delete.)
 
 ## Review gate
 

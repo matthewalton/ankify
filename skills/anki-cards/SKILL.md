@@ -21,6 +21,19 @@ the server's deck-listing tool). If it fails:
 
 Do not attempt to create or edit cards until it responds.
 
+## Preflight: load the user's profile
+
+After confirming Anki is reachable, read `~/.ankify/profile.md` if it exists. It personalises the
+generic rubric — the user's subjects/languages, which scripts they can type (governs whether type-in
+cards are appropriate), their styling palette and intensity, and their deck conventions. Let it shape
+the type choices, styling, and decks you propose.
+
+If the file does **not** exist, offer once to create it: ask ~3 short questions (what subjects/
+languages they study, which scripts they can type, and how plain or styled they like their cards),
+then write `~/.ankify/profile.md` from the template at
+`${CLAUDE_PLUGIN_ROOT}/references/profile-template.md`. Don't block on it — if they decline, proceed
+generically.
+
 ## Which flow am I in?
 
 - **Material provided** (PDF, image, file, or a substantial pasted block the user wants carded) →
@@ -34,9 +47,10 @@ When ambiguous, ask one short clarifying question rather than guessing.
 
 Card creation and curation judge cards against the same rubric. **Read it before drafting:**
 `${CLAUDE_PLUGIN_ROOT}/references/card-quality-rubric.md`. It is the single source of truth for card
-quality (atomic, right note type, no yes/no, front-loaded, preserves the user's wording) — do not
-restate or paraphrase its rules here. State the note type you chose for each card in the review so
-the user can override.
+quality — the note-type palette and when each wins, cloze-blank discipline, contrast cards, styling
+that encodes meaning, atomic/front-loaded/no-yes-no — do not restate or paraphrase its rules here.
+**Choose the note type per card from the rubric's palette** (not just Basic/Cloze) and state the
+choice in the review so the user can override.
 
 ### Resolve the note type's fields before drafting
 
@@ -76,10 +90,31 @@ and/or a topic tag. Show the tags in the review so the user can change them.
 
 ## The review gate (default behavior)
 
-After drafting, **do not commit yet.** Present the drafts compactly so the user can scan them:
+After drafting, **do not commit yet.** Show each draft **the way Anki will test it** — not as raw
+field markup — because a flaw like an answer leaking out of a cloze's own example is invisible in raw
+`{{c1::…}}` form and obvious once rendered. Before showing, **audit each draft against the rubric
+yourself** and self-flag it.
 
-- For each: note type, the field content (Front/Back, or the Cloze `Text`), target deck, and tags.
-- A short table or numbered list is ideal.
+For each draft show:
+
+- A **`✓` or `⚠`** flag (`⚠` if it trips any rubric rule), the **note type**, and target deck.
+- The **rendered prompt** with the hidden span shown hidden (e.g. `native counter [ ... ] (한 달…)`)
+  → the **answer**. For multi-cloze notes, show each generated card's prompt/answer.
+- A one-line **`Tests:`** — the single thing the card tests.
+- For a `⚠`, one line naming the problem (e.g. *"leak — 한 달 in the prompt contains the answer 달"*).
+
+Keep clean (`✓`) cards terse; spend the extra explanation line only on `⚠` cards so the user's
+attention goes straight to them. Show tags compactly. Example shape:
+
+```
+⚠ Cloze · Counters
+   Q:  native counter [ ... ] (한 달, 두 달)   A: 달
+   Tests: the native month counter
+   ⚠ leak — "한 달" in the prompt contains the answer 달
+✓ Basic (and reversed) · Vocab
+   처음  ⇄  first; the first time
+   Tests: the word 처음, both directions
+```
 
 Then ask the user to **approve / edit / cull**. Apply their edits and re-show if substantial.
 
