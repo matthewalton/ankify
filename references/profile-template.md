@@ -20,7 +20,8 @@ back to the generic default for it.
 
 <!-- Vocabulary direction: both (recognition + production) | recognition only | production only -->
 - Vocabulary direction: both
-<!-- Styling intensity: minimal (plain) | moderate | rich -->
+<!-- Styling intensity: minimal (plain) | moderate | rich. Controls colour/emphasis only — every card
+     is laid out for readability (one item per line, sections spaced) regardless of this setting. -->
 - Styling intensity: moderate
 <!-- Semantic palette: how you like meaning encoded visually, e.g. colours for the two sides of a
      contrast, how examples/hints are demoted. Leave blank for restrained defaults. -->

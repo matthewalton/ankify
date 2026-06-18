@@ -21,6 +21,9 @@ MCP server only stores media and creates or updates notes.
   Image Occlusion — places cloze blanks on the part you're actually studying, suggests a target deck,
   adds tags, and skips duplicates. The review step shows each card **the way Anki will test it**, with
   a one-line note on what it tests, before anything is written.
+- It lays cards out to read cleanly — one item per line, with distinct groups (definitions, examples)
+  spaced apart instead of run together on a single line — so they're easy to read on your phone.
+  Curation can retrofit this onto existing cramped cards too.
 - **Optional personal profile.** Drop a `~/.ankify/profile.md` (ankify offers to create one on first
   run) to tell it your subjects/languages, which scripts you can type, and how plain or styled you
   like your cards. It's machine-local and never leaves your computer; without it, ankify behaves

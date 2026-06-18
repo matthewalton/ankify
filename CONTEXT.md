@@ -19,6 +19,9 @@ no decisions (those live in `docs/adr/`), no roadmap.
   Notes.
 - **Card** — what Anki schedules and shows during review, generated from a Note. User-facing copy
   says "cards"; the thing we create/edit is technically a Note.
+- **Layout** — how a field's content is arranged vertically: one item per line, with distinct groups
+  separated by a blank line, so the card reads cleanly. Distinct from styling (the colour/emphasis that
+  encodes meaning). Layout is always applied and never changes the content — only how it's spaced.
 - **Note type / model** — the template a Note follows, defining its fields and how cards are
   generated from them. Anki's built-ins include **Basic** (`Front`/`Back`), **Cloze** (`Text` with
   `{{c1::…}}` markup), the reversed and type-in-the-answer Basic variants, and **Image Occlusion**,
@@ -40,8 +43,9 @@ no decisions (those live in `docs/adr/`), no roadmap.
   worst-first, shown before any fix is proposed.
 - **Leech** — a card Anki has flagged (the `leech` tag) as repeatedly failed. ankify reads it as a
   performance signal pointing at cards worth auditing — not as proof the card is badly written.
-- **Fix** — a change an audit proposes for a flagged card: rewrite in place, split (one card into
-  several), retag, move deck, or (only on explicit confirmation) delete.
+- **Fix** — a change an audit proposes for a flagged card: rewrite in place, relayout (re-space the
+  field for readability without changing content), split (one card into several), retag, move deck, or
+  (only on explicit confirmation) delete.
 - **Disposal** — taking an unsalvageable card out of rotation. ankify does this by tagging the card
   for the user's attention in Anki, not by deleting or suspending it directly.
 - **`steward::` tags** — ankify's bookkeeping tags on audited cards: `steward::audited` (handled —
