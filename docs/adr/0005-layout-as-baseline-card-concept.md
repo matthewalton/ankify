@@ -61,3 +61,9 @@ new cards *and* lets curation retrofit old ones — no per-skill change needed.
 - **Downside:** a whole-collection retrofit is a large, effectively one-way bulk edit (mitigated:
   `updateNoteFields` preserves scheduling history, and it changes only whitespace markup). The auditor
   now carries an extra, orthogonal axis (`cramped`) on top of the content verdicts.
+- **Re-sweep gap (and the rule it implies).** Curation normally excludes `steward::audited` cards so
+  past passes aren't re-triaged — but those cards were judged against the rubric *as it stood then*.
+  Introducing a new quality dimension (here, layout) leaves every already-audited card unchecked on
+  that dimension. So: **whenever a new dimension is added to the rubric, run one bulk re-sweep that
+  ignores the steward exclusions, scoped to the new dimension only** (content verdicts already stand).
+  This is a one-time migration, not a change to the normal exclude-audited behaviour.
