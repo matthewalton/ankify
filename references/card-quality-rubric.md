@@ -88,6 +88,33 @@ Visual structure earns its place when it makes the test clearer; colour for its 
 - **Restraint by default.** The profile sets the palette and intensity (including "minimal" for people
   who want plain cards). With no profile, keep it plain.
 
+## Layout — let the card breathe
+
+Layout is how a field's content is arranged vertically. It is separate from styling (colour/emphasis
+above): layout never changes, adds, or removes content — it only arranges what's already there. Card
+boundaries are still decided by the atomic / contrast rules above; layout never merges separate ideas
+to avoid a split, and it never rescues a non-atomic card.
+
+Apply it always. Layout is readability, not decoration, so it is baseline for **every** card —
+regardless of styling intensity (including "minimal") and whether a profile exists. The intensity knob
+governs colour/emphasis only, never whether a card is laid out.
+
+Two levels:
+
+- **One item per line.** Within a group, give each discrete piece its own line — each definition, each
+  example sentence, each form. Don't run them together with dots, slashes, or hyphens.
+- **Sections with a gap.** When a field holds distinct groups of content (e.g. the definitions vs. the
+  example sentences), separate the groups with a blank line so they read as distinct blocks. What
+  counts as a group is a per-card judgment — definitions/examples is only one common shape.
+
+**Mechanism — inline only, no CSS.** Use `<br>` for a line break and a blank line (`<br><br>`) for the
+gap between sections. This renders identically on phone and desktop and is safe on note types ankify
+didn't create (the no-editing-shared-CSS rule above still holds).
+
+**Cloze.** Lay out the `Text` field the same way, but never break the cloze syntax (`{{c1::…}}`) and
+never let a line break expose or separate a hidden span in a way that leaks it (rule 2 of cloze
+discipline still holds).
+
 ## The basics (always)
 
 - **Not yes/no or trivially-guessable.** Prompts must be specific and unambiguous.
