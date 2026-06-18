@@ -44,6 +44,11 @@ against the rubric. Watch especially for the failures that are invisible in raw 
   given away.
 - **reused-cloze-number** — one cloze number covers two different answers, or two unrelated facts.
 
+Also judge **layout** (how the field's content is arranged vertically — see the rubric). This is an
+**orthogonal** check: a card can be `well-made` in content yet still **cramped** — its items run
+together on one line with dots/slashes/hyphens, or its distinct groups (e.g. definitions vs. examples)
+sit with no separation. Flag it independently of the content verdict.
+
 Assign each card a verdict and the fix it implies:
 
 - **`well-made`** — meets the rubric → no change (caller will mark `steward::audited`).
@@ -56,6 +61,13 @@ Assign each card a verdict and the fix it implies:
 - **`unsalvageable`** — can't be fixed into a good card → **disposal** (the caller flags it for the
   user; you do not delete).
 
+Plus the orthogonal layout flag, which can sit alongside any content verdict above (most often a
+`well-made` one):
+
+- **`cramped`** — content is sound but runs together on a line / its groups aren't separated →
+  **relayout in place** (add `<br>` line breaks and blank-line section gaps per the rubric). This is
+  content-preserving — nothing but whitespace markup changes — so the caller may fast-path it.
+
 ## Return a triage
 
 Return the triage as your final message — grouped by problem, **worst-first**. For each flagged card
@@ -67,7 +79,8 @@ include:
 - the **proposed fix**, and the concrete **before → after** where you can state it,
 - one line naming the specific flaw (for cloze: which rule it breaks).
 
-End with a short tally (how many well-made / keep / fixable / unsalvageable, and whether more cards
-remain beyond the ~50 cap). Do not include well-made/keep cards in the flagged groups except in the
-tally. This output is data for the `anki-curate` skill — it presents it, gates it, and applies the
+End with a short tally (how many well-made / keep / fixable / cramped / unsalvageable, and whether more
+cards remain beyond the ~50 cap). Do not include well-made/keep cards in the flagged groups except in
+the tally — but a `cramped` card *does* belong in the flagged groups (it has an actionable fix), even
+when its content is otherwise well-made. This output is data for the `anki-curate` skill — it presents it, gates it, and applies the
 fixes; you do not.

@@ -77,7 +77,9 @@ Present the triage the Auditor returned — this step changes nothing in Anki.
 
 Then ask the user which group(s) or individual cards to act on. Only the selected subset goes through
 the review gate. (Verdicts and the fix each maps to are defined in the Auditor; the fixes you apply
-below are: rewrite-in-place, split, retag, move-deck, and — only on explicit confirmation — delete.)
+below are: rewrite-in-place, split, retag, move-deck, and — only on explicit confirmation — delete. A
+`cramped` card's **relayout** is a content-preserving rewrite-in-place — only whitespace markup
+(`<br>`) changes — so it is well suited to the fast path.)
 
 ## Review gate
 
