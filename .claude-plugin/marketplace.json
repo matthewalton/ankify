@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Anki tooling for Claude Code.",
-    "version": "0.2.0"
+    "version": "0.2.2"
   },
   "plugins": [
     {
       "name": "ankify",
       "description": "Turn material (PDF/image/text) or chat into reviewed Anki cards, and audit/improve existing cards — all via AnkiConnect.",
-      "version": "0.2.0",
+      "version": "0.2.2",
       "source": ".",
       "category": "productivity",
       "tags": [

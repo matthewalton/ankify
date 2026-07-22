@@ -158,8 +158,12 @@ practising (a tutor's examples, corrected attempts, sentences built around the d
 alongside the new vocabulary and grammar. When the material shows these:
 
 - **Card the worked sentences as their own group**, in addition to — never instead of — the separate
-  vocab/grammar cards the material also yields. A sentence card tests recalling or producing the
-  whole sentence; the note type still comes from the rubric's palette.
+  vocab/grammar cards the material also yields. A sentence card tests producing the whole sentence, so
+  make it a **type-in-the-answer** note (`Basic (type in the answer)`) — the user types the sentence
+  out, which forces the exact form. This holds **only when the user can type the sentence's script**
+  (check the profile's "Scripts I can type"); if they can't, fall back to the rubric's palette and say
+  why. The prompt cue goes in `Front` (e.g. the translation or the pattern being practised) and the
+  full sentence to be typed in `Back`.
 - **Route the sentence group by the material's date.** If the notes carry a date (a heading, a
   written date, the filename), propose the deck the profile's conventions give for dated session
   material — typically a dated subdeck. If the profile has no such convention, or the notes carry no

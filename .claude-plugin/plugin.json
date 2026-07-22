@@ -1,7 +1,7 @@
 {
   "name": "ankify",
   "description": "Turn material (PDF/image/text) or chat into reviewed Anki cards, and audit/improve existing cards — all via AnkiConnect.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "Matt Alton",
     "email": "mattalton97@gmail.com"
