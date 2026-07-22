@@ -22,6 +22,10 @@ no decisions (those live in `docs/adr/`), no roadmap.
 - **Layout** — how a field's content is arranged vertically: one item per line, with distinct groups
   separated by a blank line, so the card reads cleanly. Distinct from styling (the colour/emphasis that
   encodes meaning). Layout is always applied and never changes the content — only how it's spaced.
+- **Worked sentence** — a full sentence in Material that the user was actively practising
+  (a tutor's example, a corrected attempt, a variation on the day's pattern), as opposed to a
+  sentence that merely illustrates a fact. Carded whole, as its own group, routed by the
+  Material's date — in addition to whatever vocab/grammar the same Material yields.
 - **Note type / model** — the template a Note follows, defining its fields and how cards are
   generated from them. Anki's built-ins include **Basic** (`Front`/`Back`), **Cloze** (`Text` with
   `{{c1::…}}` markup), the reversed and type-in-the-answer Basic variants, and **Image Occlusion**,

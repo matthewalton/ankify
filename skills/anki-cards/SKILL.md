@@ -147,9 +147,30 @@ Call the server's **`sync`** tool, then add a brief line to your report: `Synced
 ## Cards from material — flow
 
 1. Preflight.
-2. Read the material; extract the test-worthy facts.
+2. Read the material; extract the test-worthy facts, and spot any worked sentences (below).
 3. Draft atomic cards, choosing note type per item; resolve fields, deck, tags; check duplicates.
 4. Review gate → commit `addNotes` → sync → report.
+
+### Worked sentences in dated notes
+
+Revision or session notes often contain **worked sentences** — full sentences the user was actively
+practising (a tutor's examples, corrected attempts, sentences built around the day's pattern) — 
+alongside the new vocabulary and grammar. When the material shows these:
+
+- **Card the worked sentences as their own group**, in addition to — never instead of — the separate
+  vocab/grammar cards the material also yields. A sentence card tests recalling or producing the
+  whole sentence; the note type still comes from the rubric's palette.
+- **Route the sentence group by the material's date.** If the notes carry a date (a heading, a
+  written date, the filename), propose the deck the profile's conventions give for dated session
+  material — typically a dated subdeck. If the profile has no such convention, or the notes carry no
+  date, ask rather than guess.
+- **Everything else still goes to its topic deck.** New words and grammar patterns extracted from
+  those same notes are drafted separately and routed per the usual deck conventions — the dated
+  sentence group never absorbs them.
+
+Not every full sentence qualifies: a sentence that merely *illustrates* a fact is example material
+for that fact's card, not a worked sentence. Look for signs the sentence itself was the object of
+practice — corrections, repetition, variations on a pattern, translation pairs.
 
 ## Cards from chat — flow
 

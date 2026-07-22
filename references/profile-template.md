@@ -29,5 +29,7 @@ back to the generic default for it.
 
 ## Deck conventions
 
-<!-- How your decks are named/organised, and where new cards on a topic should go. -->
+<!-- How your decks are named/organised, where new cards on a topic should go, and — if you keep
+     one — your deck for dated session/lesson material (worked sentences are routed there by the
+     material's date). -->
 - 
