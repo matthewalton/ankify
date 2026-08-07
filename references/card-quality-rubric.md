@@ -29,7 +29,8 @@ server's `modelFieldNames` / model-info tool) — e.g. Basic uses `Front`/`Back`
 
 - **Basic** (`Front`/`Back`) — recall one discrete fact in **one** direction.
 - **Basic (and reversed card)** — a pair where you need **both** recognition *and* production (most
-  vocabulary). Generates both directions from one note.
+  vocabulary). Generates both directions from one note. Note that **every** field is a prompt on one of
+  the two cards, so this type has nowhere to put answer-only content (see no-spoilers, below).
 - **Basic (type in the answer)** — when the **exact form or spelling is the point** and typing it
   forces the precision. Only when the user can type that script (check the profile).
 - **Cloze** (`Text`) — a fact embedded in a sentence, a **contrast**, or one specific element of a
@@ -38,7 +39,29 @@ server's `modelFieldNames` / model-info tool) — e.g. Basic uses `Front`/`Back`
   conjugation tables, labeled images.
 
 Custom note types (`createModel`) are deliberately out of scope — reach for one only when nothing
-above fits, and say why.
+above fits, and say why. Needing **both directions and answer-only content** is the standard case where
+nothing above fits: the reversible types are two-field, and everything in them is a prompt.
+
+## No spoilers — a field that becomes a prompt may not contain its own answer
+
+Before writing a field, ask **which cards will show this field as the question.** On a reversible or
+multi-template note that is not just the front: `Basic (and reversed card)` makes `Back` the prompt of
+the second card, so an example sentence, a collocation, or a "cf." note sitting there is shown
+*before* the answer and simply hands it over.
+
+- **Check every direction the note generates**, not only the one you drafted. Read each generated card
+  back as a question and confirm the answer isn't already on screen.
+- **Inflected, derived, and compound forms count as the answer.** 두다 is given away by 뒀어요, 크다 by
+  커요, 우리 by 우리 집. A stem match is a leak, not a hint.
+- **The de-spoiled prompt must still pin down one answer.** Deleting the giveaway often leaves a prompt
+  so vague that several answers are right ("only" → 만 / 뿐 / 밖에; "life" → 삶 / 생명 / 생활).
+  Disambiguate **in the prompt's own language** — a register, sense, domain, or direction marker — and
+  never by leaking the target language.
+- **Put examples where they cannot leak.** If the material needs answer-only content (examples,
+  mnemonics, irregular forms) *and* both directions, that is the case for a note type with a dedicated
+  answer-only field, rendered after the answer on every template.
+
+This is the general form of cloze rule 2 below: it binds every note type, not just Cloze.
 
 ## Cloze discipline — where the blank goes
 
