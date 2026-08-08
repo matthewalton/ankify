@@ -103,6 +103,14 @@ Map each approved fix to a tool. Prefer changes that **preserve scheduling histo
   history), then `addNotes` for the remaining facts as new cards (these start fresh).
 - **Retag:** `addTags` / `removeTags` / `replaceTags`.
 - **Move deck:** `changeDeck`. Preserves history.
+- **Change note type:** the right fix when the material needs a form the current type cannot hold —
+  most often both directions *plus* answer-only content, which no two-field type has room for. **Not
+  destructive:** Anki maps cards by template ordinal, so card ids, interval, due, ease and the full
+  review log all survive. `updateNoteModel` is **not exposed** by the MCP server, so hand this to the
+  user: Browse → select the notes → *Notes → Change Note Type*, mapping each old template to its
+  equivalent new one. **Trap:** a template mapped to "Nothing" deletes that card and its history, so
+  every template must map to a real one. Orientation is per-batch — notes authored the other way round
+  (English on the front) need their own pass with the mapping reversed, or their fields land swapped.
 - **Delete:** `deleteNotes` — **only after explicit, per-card confirmation.** Never delete in a batch
   default and never on the fast path.
 - **Disposal of an unsalvageable card:** do **not** delete or try to suspend it. Add the
