@@ -57,6 +57,18 @@ the second card, so an example sentence, a collocation, or a "cf." note sitting 
   so vague that several answers are right ("only" → 만 / 뿐 / 밖에; "life" → 삶 / 생명 / 생활).
   Disambiguate **in the prompt's own language** — a register, sense, domain, or direction marker — and
   never by leaking the target language.
+- **Only the answer's own language leaks — don't strip more than that.** An annotation written in the
+  *prompt's* language is safe where it sits, and is often the very thing pinning the answer down: 형
+  glossed only "older brother" doesn't exclude 오빠, and "male speaker" is what does. Stripping that off
+  the prompt to "clean up" a working card is a regression, not a fix. Move what leaks; leave what
+  disambiguates.
+- **Watch for a discriminator welded to the spoiler.** "honorific · replaces 나이" is one string doing
+  two jobs, so removing the Hangul takes the register marker with it and leaves a bare "age" that no
+  longer excludes 나이. Rewrite the marker in the prompt's language — `age <i>(honorific)</i>` — and keep
+  the detail answer-side.
+- **The objective check is collision.** Two notes whose prompts read the same cannot both be answered.
+  After de-spoiling a set, compare the prompt fields across the whole set: 주무시다 and 자다 both reduced
+  to "to sleep". Identical prompts mean at least one of them still needs a marker.
 - **Put examples where they cannot leak.** If the material needs answer-only content (examples,
   mnemonics, irregular forms) *and* both directions, that is the case for a note type with a dedicated
   answer-only field, rendered after the answer on every template.
